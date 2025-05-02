@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>{{ action }} Application</h3>
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">{{ form.company.label }} {{ form.company(class_="form-control") }}</div>
+  <div class="mb-3">{{ form.position.label }} {{ form.position(class_="form-control") }}</div>
+  <div class="mb-3">{{ form.date_applied.label }} {{ form.date_applied(class_="form-control") }}</div>
+  <div class="mb-3">{{ form.status.label }} {{ form.status(class_="form-select") }}</div>
+  <div class="mb-3">{{ form.link.label }} {{ form.link(class_="form-control") }}</div>
+  <div class="mb-3">{{ form.notes.label }} {{ form.notes(class_="form-control", rows=3) }}</div>
+  <button class="btn btn-primary">{{ action }}</button>
+</form>
+{% endblock %}
