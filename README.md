@@ -1,3 +1,6 @@
+# ORIGINAL PYTHON APP I MADE (Console Program)
+https://github.com/DanjoBanjo03/pythonJobTrackerApp
+
 # Job Application Tracker
 
 A simple web application to track job applications built with Flask.
