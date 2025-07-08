@@ -2,9 +2,14 @@ from flask import Flask, render_template, redirect, url_for, request
 from jobTracker.models import db, JobApplication
 from jobTracker.forms import JobForm
 from datetime import date
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jobs.db'
+# Use absolute path to ensure database is created in project directory
+basedir = os.path.abspath(os.path.dirname(__file__))
+instance_dir = os.path.join(basedir, "instance")
+os.makedirs(instance_dir, exist_ok=True)  # Create instance directory if it doesn't exist
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(instance_dir, "jobs.db")}'
 app.config['SECRET_KEY'] = 'change-me'
 db.init_app(app)
 
