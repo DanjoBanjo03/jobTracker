@@ -44,3 +44,6 @@ The application will be available at http://127.0.0.1:5000/
   - `base.html`: Base template with navigation
   - `index.html`: Job listing page
   - `form.html`: Add/edit job form
+  
+## To do:
+- Add scraping to automatically fill in job description and company info

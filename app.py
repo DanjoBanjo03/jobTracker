@@ -10,22 +10,42 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 instance_dir = os.path.join(basedir, "instance")
 os.makedirs(instance_dir, exist_ok=True)  # Create instance directory if it doesn't exist
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(instance_dir, "jobs.db")}'
-app.config['SECRET_KEY'] = 'change-me'
+app.config['SECRET_KEY'] = 'magic-key'
 db.init_app(app)
 
 with app.app_context():
     db.create_all()
 
+@app.context_processor
+def inject_job_count():
+    """Make job count available to all templates"""
+    total_jobs = JobApplication.query.count()
+    return dict(total_jobs=total_jobs)
+
 @app.route('/')
 def index():
     q = request.args.get('q','')
+    sort = request.args.get('sort', 'date_desc')
+
+    # Base query
+    query = JobApplication.query
+
+    # Apply search filter if provided
     if q:
-        apps = JobApplication.query.filter(
-            JobApplication.company.ilike(f'%{q}%')
-        ).all()
-    else:
-        apps = JobApplication.query.order_by(JobApplication.date_applied.desc()).all()
-    return render_template('index.html', apps=apps, q=q)
+        query = query.filter(JobApplication.company.ilike(f'%{q}%'))
+
+    # Apply sorting
+    if sort == 'date_asc':
+        query = query.order_by(JobApplication.date_applied.asc())
+    elif sort == 'company':
+        query = query.order_by(JobApplication.company.asc())
+    elif sort == 'status':
+        query = query.order_by(JobApplication.status.asc())
+    else:  # default to date_desc
+        query = query.order_by(JobApplication.date_applied.desc())
+
+    apps = query.all()
+    return render_template('index.html', apps=apps, q=q, sort=sort)
 
 @app.route('/add', methods=['GET','POST'])
 def add():
