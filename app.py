@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
-from models import db, JobApplication
-from forms import JobForm
+from jobTracker.models import db, JobApplication
+from jobTracker.forms import JobForm
 from datetime import date
 import os
 

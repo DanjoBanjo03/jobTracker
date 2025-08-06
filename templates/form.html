@@ -3,10 +3,42 @@
 <h3>{{ action }} Application</h3>
 <form method="post">
   {{ form.hidden_tag() }}
-  <div class="mb-3">{{ form.company.label }} {{ form.company(class_="form-control") }}</div>
-  <div class="mb-3">{{ form.position.label }} {{ form.position(class_="form-control") }}</div>
-  <div class="mb-3">{{ form.date_applied.label }} {{ form.date_applied(class_="form-control") }}</div>
-  <div class="mb-3">{{ form.status.label }} {{ form.status(class_="form-select") }}</div>
+  <div class="mb-3">
+    <label for="{{ form.company.id }}">
+      {{ form.company.label.text }}
+      {% if 'required' in form.company.flags %}
+        <span class="text-danger">*</span>
+      {% endif %}
+    </label>
+    {{ form.company(class_="form-control") }}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.position.id }}">
+      {{ form.position.label.text }}
+      {% if 'required' in form.position.flags %}
+        <span class="text-danger">*</span>
+      {% endif %}
+    </label>
+    {{ form.position(class_="form-control") }}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.date_applied.id }}">
+      {{ form.date_applied.label.text }}
+      {% if 'required' in form.date_applied.flags %}
+        <span class="text-danger">*</span>
+      {% endif %}
+    </label>
+    {{ form.date_applied(class_="form-control") }}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.status.id }}">
+      {{ form.status.label.text }}
+      {% if 'required' in form.status.flags %}
+        <span class="text-danger">*</span>
+      {% endif %}
+    </label>
+    {{ form.status(class_="form-select") }}
+  </div>
   <div class="mb-3">{{ form.link.label }} {{ form.link(class_="form-control") }}</div>
   <div class="mb-3">{{ form.notes.label }} {{ form.notes(class_="form-control", rows=3) }}</div>
   <div class="mb-3">{{ form.username.label }} {{ form.username(class_="form-control", placeholder="Optional") }}</div>
