@@ -22,6 +22,10 @@ def inject_job_count():
     total_jobs = JobApplication.query.count()
     return dict(total_jobs=total_jobs)
 
+@app.context_processor
+def inject_today():
+    return {'today': date.today().isoformat()}
+
 @app.route('/')
 def index():
     q = request.args.get('q','')

@@ -28,7 +28,10 @@
         <span class="text-danger">*</span>
       {% endif %}
     </label>
-    {{ form.date_applied(class_="form-control") }}
+    {{ form.date_applied(
+        class_="form-control",
+        value=(form.date_applied.data or today)
+      ) }}
   </div>
   <div class="mb-3">
     <label for="{{ form.status.id }}">
@@ -39,8 +42,8 @@
     </label>
     {{ form.status(class_="form-select") }}
   </div>
-  <div class="mb-3">{{ form.link.label }} {{ form.link(class_="form-control") }}</div>
-  <div class="mb-3">{{ form.notes.label }} {{ form.notes(class_="form-control", rows=3) }}</div>
+  <div class="mb-3">{{ form.link.label }} {{ form.link(class_="form-control", placeholder="Optional") }}</div>
+  <div class="mb-3">{{ form.notes.label }} {{ form.notes(class_="form-control", rows=3, placeholder="Optional") }}</div>
   <div class="mb-3">{{ form.username.label }} {{ form.username(class_="form-control", placeholder="Optional") }}</div>
   <div class="mb-3">{{ form.password.label }} {{ form.password(class_="form-control", placeholder="Optional") }}</div>
   <button class="btn btn-primary">{{ action }}</button>
