@@ -44,8 +44,26 @@
   </div>
   <div class="mb-3">{{ form.link.label }} {{ form.link(class_="form-control", placeholder="Optional") }}</div>
   <div class="mb-3">{{ form.notes.label }} {{ form.notes(class_="form-control", rows=3, placeholder="Optional") }}</div>
-  <div class="mb-3">{{ form.username.label }} {{ form.username(class_="form-control", placeholder="Optional") }}</div>
-  <div class="mb-3">{{ form.password.label }} {{ form.password(class_="form-control", placeholder="Optional") }}</div>
+  <div class="mb-3">
+    {{ form.username.label }}
+    {{ form.username(class_="form-control", placeholder="Optional") }}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.password.id }}">
+      {{ form.password.label.text }}
+      {% if 'required' in form.password.flags %}
+        <span class="text-danger">*</span>
+      {% endif %}
+    </label>
+    <input
+      type="text"
+      name="{{ form.password.name }}"
+      id="{{ form.password.id }}"
+      class="form-control"
+      placeholder="Optional"
+      value="{{ form.password.data or '' }}"
+    />
+  </div>
   <button class="btn btn-primary">{{ action }}</button>
 </form>
 {% endblock %}

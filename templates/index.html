@@ -37,7 +37,10 @@
       </td>
       <td>
         <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('edit', id=j.id) }}">Edit</a>
-        <form method="post" action="{{ url_for('delete', id=j.id) }}" style="display:inline">
+        <form method="post"
+          action="{{ url_for('delete', id=j.id) }}"
+          style="display:inline"
+          onsubmit="return confirm('Are you sure you want to delete {{ j.company }} - {{ j.position }}?');">
           <button class="btn btn-sm btn-outline-danger">Del</button>
         </form>
       </td>
