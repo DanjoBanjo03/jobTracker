@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
-from jobTracker.models import db, JobApplication
-from jobTracker.forms import JobForm
+from models import db, JobApplication
+from forms import JobForm
 from datetime import date
 import os
 
@@ -57,7 +57,9 @@ def add():
             date_applied=form.date_applied.data,
             status=form.status.data,
             notes=form.notes.data,
-            link=form.link.data
+            link=form.link.data,
+            username=form.username.data,
+            password=form.password.data
         )
         db.session.add(job)
         db.session.commit()

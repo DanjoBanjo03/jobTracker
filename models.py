@@ -10,3 +10,5 @@ class JobApplication(db.Model):
     status = db.Column(db.String(50), nullable=False)
     notes = db.Column(db.Text)
     link = db.Column(db.String(255))
+    username = db.Column(db.String(120))
+    password = db.Column(db.String(255))

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, TextAreaField, SelectField, URLField, SubmitField
+from wtforms import StringField, DateField, TextAreaField, SelectField, URLField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Optional, URL
 
 class JobForm(FlaskForm):
@@ -14,4 +14,6 @@ class JobForm(FlaskForm):
     ], validators=[DataRequired()])
     notes = TextAreaField(validators=[Optional()])
     link = URLField(validators=[Optional(), URL()])
+    username = StringField(validators=[Optional()])
+    password = PasswordField(validators=[Optional()])
     submit = SubmitField()
